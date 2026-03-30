@@ -181,7 +181,7 @@ def smooth_gesture(new_gesture):
     return None
 
 # ---------- Overlay placement ----------
-def place_to_side(face_box, overlay_w, overlay_h, frame_w, frame_h, margin=15):
+def place_to_side(face_box, overlay_w, overlay_h, frame_w, frame_h, margin=40):
     x_min, y_min, x_max, y_max = face_box
     x = x_max + margin
     y = y_min
@@ -290,10 +290,10 @@ def main():
             if gesture and overlays.get(gesture) is not None and face_box is not None:
                 ov = overlays[gesture]
                 face_w_px = max(1, face_box[2] - face_box[0])
-                scale = min(2.0, max(0.4, (1.0 * face_w_px) / ov.shape[1]))
+                scale = min(2.5, max(0.7, (1.3 * face_w_px) / ov.shape[1]))
                 ow = int(ov.shape[1] * scale)
                 oh = int(ov.shape[0] * scale)
-                ox, oy = place_to_side(face_box, ow, oh, w, h, margin=15)
+                ox, oy = place_to_side(face_box, ow, oh, w, h, margin=40)
                 overlay_bgra(frame, ov, ox, oy, scale=scale)
 
             # ---------- HUD ----------
